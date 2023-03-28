@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BasketVM>
+@{
+    ViewData["Title"] = "Index";
+}
+<section class="breadcrumb-section">
+	<h2 class="sr-only">Site Breadcrumb</h2>
+	<div class="container">
+		<div class="breadcrumb-contents">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item active">Cart</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+</section>
+<!-- Cart Page Start -->
+<div class="cart-page">
+	@if (Model?.Count()> 0 && Model != null)
+	{
+		@await Html.PartialAsync("_BasketIndexPartial",Model)
+	}
+	else
+	{
+		<div class="empty-cart">
+			<div class="container-fluid  mt-100">
+				<div class="row">
+
+					<div class="col-md-12">
+
+						<div class="card">
+							<div class="card-header">
+								<h5>Cart</h5>
+							</div>
+							<div class="card-body cart">
+								<div class="col-sm-12 empty-cart-cls text-center">
+									<img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+									<h3><strong>Your Cart is Empty</strong></h3>
+									<h4>Hey ,quick add something</h4>
+									<a href="#" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	}
+</div>
+<!-- Cart Page End -->

@@ -1,9 +1,18 @@
 ﻿@inject ILayoutService layoutService
 
 @{
-    IDictionary<string, string> settings = await layoutService.GetSettings();
+    List<BasketVM> basketVMs = await layoutService.GetBasket();
     IEnumerable<Category> categories = await layoutService.GetCategories();
+    IDictionary<string, string> settings = await layoutService.GetSettings();
+
+    HeaderVM headerVM = new HeaderVM
+            {
+                Settings = settings,
+                 Categories = categories,
+                BasketVMs = basketVMs
+    };
 }
+ 
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -27,7 +36,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3 ">
-                            <a href="~/assets/index.html" class="site-brand">
+                            <a href="index.html" class="site-brand">
                                 <img src="~/assets/image/@settings.FirstOrDefault(s=>s.Key == "Logo")" alt="">
                             </a>
                         </div>
@@ -46,59 +55,59 @@
                             <div class="main-navigation flex-lg-right">
                                 <ul class="main-menu menu-right ">
                                     <li class="menu-item has-children">
-                                        <a href="~/assets/javascript:void(0)">
+                                        <a href="javascript:void(0)">
                                             Home <i class="fas fa-chevron-down dropdown-arrow"></i>
                                         </a>
                                         <ul class="sub-menu">
-                                            <li> <a href="~/assets/index.html">Home One</a></li>
-                                            <li> <a href="~/assets/index-2.html">Home Two</a></li>
-                                            <li> <a href="~/assets/index-3.html">Home Three</a></li>
-                                            <li> <a href="~/assets/index-4.html">Home Four</a></li>
-                                            <li> <a href="~/assets/index-5.html">Home Five</a></li>
+                                            <li> <a href="index.html">Home One</a></li>
+                                            <li> <a href="index-2.html">Home Two</a></li>
+                                            <li> <a href="index-3.html">Home Three</a></li>
+                                            <li> <a href="index-4.html">Home Four</a></li>
+                                            <li> <a href="index-5.html">Home Five</a></li>
                                         </ul>
                                     </li>
                                     <!-- Shop -->
                                     <li class="menu-item has-children mega-menu">
-                                        <a href="~/assets/javascript:void(0)">
+                                        <a href="javascript:void(0)">
                                             shop <i class="fas fa-chevron-down dropdown-arrow"></i>
                                         </a>
                                         <ul class="sub-menu four-column">
                                             <li class="cus-col-25">
-                                                <h3 class="menu-title"><a href="~/assets/javascript:void(0)">Shop Grid </a></h3>
+                                                <h3 class="menu-title"><a href="javascript:void(0)">Shop Grid </a></h3>
                                                 <ul class="mega-single-block">
-                                                    <li><a href="~/assets/shop-grid.html">Fullwidth</a></li>
-                                                    <li><a href="~/assets/shop-grid-left-sidebar.html">left Sidebar</a></li>
-                                                    <li><a href="~/assets/shop-grid-right-sidebar.html">Right Sidebar</a></li>
+                                                    <li><a href="shop-grid.html">Fullwidth</a></li>
+                                                    <li><a href="shop-grid-left-sidebar.html">left Sidebar</a></li>
+                                                    <li><a href="shop-grid-right-sidebar.html">Right Sidebar</a></li>
                                                 </ul>
                                             </li>
                                             <li class="cus-col-25">
-                                                <h3 class="menu-title"> <a href="~/assets/javascript:void(0)">Shop List</a></h3>
+                                                <h3 class="menu-title"> <a href="javascript:void(0)">Shop List</a></h3>
                                                 <ul class="mega-single-block">
-                                                    <li><a href="~/assets/shop-list.html">Fullwidth</a></li>
-                                                    <li><a href="~/assets/shop-list-left-sidebar.html">left Sidebar</a></li>
-                                                    <li><a href="~/assets/shop-list-right-sidebar.html">Right Sidebar</a></li>
+                                                    <li><a href="shop-list.html">Fullwidth</a></li>
+                                                    <li><a href="shop-list-left-sidebar.html">left Sidebar</a></li>
+                                                    <li><a href="shop-list-right-sidebar.html">Right Sidebar</a></li>
                                                 </ul>
                                             </li>
                                             <li class="cus-col-25">
                                                 <h3 class="menu-title">
-                                                    <a href="~/assets/javascript:void(0)">
+                                                    <a href="javascript:void(0)">
                                                         Product Details
                                                         1
                                                     </a>
                                                 </h3>
                                                 <ul class="mega-single-block">
-                                                    <li><a href="~/assets/product-details.html">Product Details Page</a></li>
+                                                    <li><a href="product-details.html">Product Details Page</a></li>
                                                     <li>
-                                                        <a href="~/assets/product-details-affiliate.html">
+                                                        <a href="product-details-affiliate.html">
                                                             Product Details
                                                             Affiliate
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="~/assets/product-details-group.html">Product Details Group</a>
+                                                        <a href="product-details-group.html">Product Details Group</a>
                                                     </li>
                                                     <li>
-                                                        <a href="~/assets/product-details-variable.html">
+                                                        <a href="product-details-variable.html">
                                                             Product Details
                                                             Variables
                                                         </a>
@@ -107,26 +116,26 @@
                                             </li>
                                             <li class="cus-col-25">
                                                 <h3 class="menu-title">
-                                                    <a href="~/assets/javascript:void(0)">
+                                                    <a href="javascript:void(0)">
                                                         Product Details
                                                         2
                                                     </a>
                                                 </h3>
                                                 <ul class="mega-single-block">
                                                     <li>
-                                                        <a href="~/assets/product-details-left-thumbnail.html">left Thumbnail</a>
+                                                        <a href="product-details-left-thumbnail.html">left Thumbnail</a>
                                                     </li>
                                                     <li>
-                                                        <a href="~/assets/product-details-right-thumbnail.html">
+                                                        <a href="product-details-right-thumbnail.html">
                                                             Right
                                                             Thumbnail
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="~/assets/product-details-left-gallery.html">Left Gallery</a>
+                                                        <a href="product-details-left-gallery.html">Left Gallery</a>
                                                     </li>
                                                     <li>
-                                                        <a href="~/assets/product-details-right-gallery.html">Right Gallery</a>
+                                                        <a href="product-details-right-gallery.html">Right Gallery</a>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -134,41 +143,41 @@
                                     </li>
                                     <!-- Pages -->
                                     <li class="menu-item has-children">
-                                        <a href="~/assets/javascript:void(0)">
+                                        <a href="javascript:void(0)">
                                             Pages <i class="fas fa-chevron-down dropdown-arrow"></i>
                                         </a>
                                         <ul class="sub-menu">
-                                            <li><a href="~/assets/cart.html">Cart</a></li>
-                                            <li><a href="~/assets/checkout.html">Checkout</a></li>
-                                            <li><a href="~/assets/compare.html">Compare</a></li>
-                                            <li><a href="~/assets/wishlist.html">Wishlist</a></li>
-                                            <li><a href="~/assets/login-register.html">Login Register</a></li>
-                                            <li><a href="~/assets/my-account.html">My Account</a></li>
-                                            <li><a href="~/assets/order-complete.html">Order Complete</a></li>
-                                            <li><a href="~/assets/faq.html">Faq</a></li>
-                                            <li><a href="~/assets/contact-2.html">contact 02</a></li>
+                                            <li><a href="cart.html">Cart</a></li>
+                                            <li><a href="checkout.html">Checkout</a></li>
+                                            <li><a href="compare.html">Compare</a></li>
+                                            <li><a href="wishlist.html">Wishlist</a></li>
+                                            <li><a href="login-register.html">Login Register</a></li>
+                                            <li><a href="my-account.html">My Account</a></li>
+                                            <li><a href="order-complete.html">Order Complete</a></li>
+                                            <li><a href="faq.html">Faq</a></li>
+                                            <li><a href="contact-2.html">contact 02</a></li>
                                         </ul>
                                     </li>
                                     <!-- Blog -->
                                     <li class="menu-item has-children mega-menu">
-                                        <a href="~/assets/javascript:void(0)">
+                                        <a href="javascript:void(0)">
                                             Blog <i class="fas fa-chevron-down dropdown-arrow"></i>
                                         </a>
                                         <ul class="sub-menu three-column">
                                             <li class="cus-col-33">
                                                 <h3 class="menu-title"><a href="~/assets/javascript:void(0)">Blog Grid</a></h3>
                                                 <ul class="mega-single-block">
-                                                    <li><a href="~/assets/blog.html">Full Widh (Default)</a></li>
-                                                    <li><a href="~/assets/blog-left-sidebar.html">left Sidebar</a></li>
-                                                    <li><a href="~/assets/blog-right-sidebar.html">Right Sidebar</a></li>
+                                                    <li><a href="blog.html">Full Widh (Default)</a></li>
+                                                    <li><a href="blog-left-sidebar.html">left Sidebar</a></li>
+                                                    <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
                                                 </ul>
                                             </li>
                                             <li class="cus-col-33">
                                                 <h3 class="menu-title"><a href="~/assets/javascript:void(0)">Blog List </a></h3>
                                                 <ul class="mega-single-block">
                                                     <!-- <li><a href="~/assets/blog-list.html">Full Widh (Default)</a></li> -->
-                                                    <li><a href="~/assets/blog-list-left-sidebar.html">left Sidebar</a></li>
-                                                    <li><a href="~/assets/blog-list-right-sidebar.html">Right Sidebar</a></li>
+                                                    <li><a href="blog-list-left-sidebar.html">left Sidebar</a></li>
+                                                    <li><a href="blog-list-right-sidebar.html">Right Sidebar</a></li>
                                                 </ul>
                                             </li>
                                             <li class="cus-col-33">
@@ -176,17 +185,17 @@
                                                     <a href="~/assets/javascript:void(0)">Blog Details</a>
                                                 </h3>
                                                 <ul class="mega-single-block">
-                                                    <li><a href="~/assets/blog-details.html">Image Format (Default)</a></li>
-                                                    <li><a href="~/assets/blog-details-gallery.html">Gallery Format</a></li>
-                                                    <li><a href="~/assets/blog-details-audio.html">Audio Format</a></li>
-                                                    <li><a href="~/assets/blog-details-video.html">Video Format</a></li>
-                                                    <li><a href="~/assets/blog-details-left-sidebar.html">left Sidebar</a></li>
+                                                    <li><a href="blog-details.html">Image Format (Default)</a></li>
+                                                    <li><a href="blog-details-gallery.html">Gallery Format</a></li>
+                                                    <li><a href="blog-details-audio.html">Audio Format</a></li>
+                                                    <li><a href="blog-details-video.html">Video Format</a></li>
+                                                    <li><a href="blog-details-left-sidebar.html">left Sidebar</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="~/assets/contact.html">Contact</a>
+                                        <a href="contact.html">Contact</a>
                                     </li>
                                 </ul>
                             </div>
@@ -200,34 +209,27 @@
                         <div class="col-lg-3">
                             <nav class="category-nav   ">
                                 <div class="cattegory">
-                                    <a href="~/assets/javascript:void(0)" class="category-trigger">
+                                    <a href="javascript:void(0)" class="category-trigger">
                                         <i class="fa fa-bars"></i>Browse
                                         categories
                                     </a>
-                                    @foreach (Category parent in categories)
-                                    {
-                                        <a href=@parent.Id>@parent.Name</a>
-                                        @if (parent.Children != null && parent.Children.Count() > 0)
+                                    <ul class="category-menu">
+                                        @foreach (Category category in headerVM.Categories)
                                         {
-                                            @foreach (Category child in parent.Children)
-                                            {
-                                                <ul class="category-menu">
-                                                    <li class="cat-item has-children">
-
-                                                        <ul class="sub-menu">
-                                                            <li><a href=@child.Id>@child.Name</a></li>
-                                                            @*<li><a href=child.Id>@child.Name</a></li>
-                                                <li><a href=child.Id>@child.Name</a></li>
-                                                <li><a href=child.Id>@child.Name</a></li>
-                                                <li><a href=child.Id>@child.Name</a></li>*@
-                                                        </ul>
-                                                    </li>
-
-                                                </ul>
-                                            }
+                                            <li class="cat-item @(category.Children.Count()>0 && category.Children != null ? "has-children" : "")">
+                                                <a href="#">@category.Name</a>
+                                                @if (category.Children.Count() > 0 && category.Children != null)
+                                                {
+                                                    <ul class="sub-menu">
+                                                        @foreach (Category child in category.Children)
+                                                        {
+                                                            <li><a href="#">@child.Name</a></li>
+                                                        }
+                                                    </ul>
+                                                }
+                                            </li>
                                         }
-                                    }
-
+                                    </ul>
                                 </div>
                             </nav>
                         </div>
@@ -236,63 +238,65 @@
                                 <input class="search" type="text" placeholder="Search entire store here">
                                 <button>Search</button>
                             </div>
-                            <div style="position:relative">
-                                <ul style="position:absolute;z-index:9999;width:100%;" class="list-group">
-                                    
-                                    
-                                </ul>
-                            </div>
+                            @*<div style="position:relative">
+                            <ul style="position:absolute;z-index:9999;width:100%;" class="list-group">
+                            </ul>
+                            </div>*@
                         </div>
                         <div class="col-lg-4">
                             <div class="main-navigation flex-lg-right">
                                 <div class="cart-widget">
                                     <div class="login-block">
-                                        <a href="~/assets/login-register.html" class="font-weight-bold">Login</a> <br>
-                                        <span>or</span><a href="~/assets/login-register.html">Register</a>
+                                        <a href="login-register.html" class="font-weight-bold">Login</a> <br>
+                                        <span>or</span><a href="login-register.html">Register</a>
                                     </div>
-                                    <div class="cart-block">
-                                        <div class="cart-total">
-                                            <span class="text-number">
-                                                1
-                                            </span>
-                                            <span class="text-item">
-                                                Shopping Cart
-                                            </span>
-                                            <span class="price">
-                                                £0.00
-                                                <i class="fas fa-chevron-down"></i>
-                                            </span>
-                                        </div>
-                                        <div class="cart-dropdown-block">
-                                            <div class=" single-cart-block ">
-                                                <div class="cart-product">
-                                                    <a href="~/assets/product-details.html" class="image">
-                                                        <img src="~/assets/image/products/cart-product-1.jpg" alt="">
-                                                    </a>
-                                                    <div class="content">
-                                                        <h3 class="title">
-                                                            <a href="~/assets/product-details.html">
-                                                                Kodak PIXPRO
-                                                                Astro Zoom AZ421 16 MP
-                                                            </a>
-                                                        </h3>
-                                                        <p class="price"><span class="qty">1 ×</span> £87.34</p>
-                                                        <button class="cross-btn"><i class="fas fa-times"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class=" single-cart-block ">
-                                                <div class="btn-block">
-                                                    <a href="~/assets/cart.html" class="btn">
-                                                        View Cart <i class="fas fa-chevron-right"></i>
-                                                    </a>
-                                                    <a href="~/assets/checkout.html" class="btn btn--primary">
-                                                        Check Out <i class="fas fa-chevron-right"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="header-cart">
+                                        @await Html.PartialAsync("_BasketCartPartial",headerVM.BasketVMs)
+
                                     </div>
+                                    @*<div class="cart-block">
+                                    <div class="cart-total">
+                                    <span class="text-number">
+                                    1
+                                    </span>
+                                    <span class="text-item">
+                                    Shopping Cart
+                                    </span>
+                                    <span class="price">
+                                    £0.00
+                                    <i class="fas fa-chevron-down"></i>
+                                    </span>
+                                    </div>
+                                    <div class="cart-dropdown-block">
+                                    <div class=" single-cart-block ">
+                                    <div class="cart-product">
+                                    <a href="~/assets/product-details.html" class="image">
+                                    <img src="~/assets/image/products/cart-product-1.jpg" alt="">
+                                    </a>
+                                    <div class="content">
+                                    <h3 class="title">
+                                    <a href="~/assets/product-details.html">
+                                    Kodak PIXPRO
+                                    Astro Zoom AZ421 16 MP
+                                    </a>
+                                    </h3>
+                                    <p class="price"><span class="qty">1 ×</span> £87.34</p>
+                                    <button class="cross-btn"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class=" single-cart-block ">
+                                    <div class="btn-block">
+                                    <a href="~/assets/cart.html" class="btn">
+                                    View Cart <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                    <a href="~/assets/checkout.html" class="btn btn--primary">
+                                    Check Out <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
                         </div>
@@ -305,124 +309,124 @@
                 <div class="container">
                     <div class="row align-items-sm-end align-items-center">
                         <div class="col-md-4 col-7">
-                            <a href="~/assets/index.html" class="site-brand">
+                            <a href="index.html" class="site-brand">
                                 <img src="~/assets/image/logo.png" alt="">
                             </a>
                         </div>
                         <div class="col-md-5 order-3 order-md-2">
                             <nav class="category-nav   ">
                                 <div>
-                                    <a href="~/assets/javascript:void(0)" class="category-trigger">
+                                    <a href="javascript:void(0)" class="category-trigger">
                                         <i class="fa fa-bars"></i>Browse
                                         categories
                                     </a>
                                     <ul class="category-menu">
                                         <li class="cat-item has-children">
-                                            <a href="~/assets/#">Arts & Photography</a>
+                                            <a href="#">Arts & Photography</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/#">Bags & Cases</a></li>
-                                                <li><a href="~/assets/#">Binoculars & Scopes</a></li>
-                                                <li><a href="~/assets/#">Digital Cameras</a></li>
-                                                <li><a href="~/assets/#">Film Photography</a></li>
-                                                <li><a href="~/assets/#">Lighting & Studio</a></li>
+                                                <li><a href="#">Bags & Cases</a></li>
+                                                <li><a href="#">Binoculars & Scopes</a></li>
+                                                <li><a href="#">Digital Cameras</a></li>
+                                                <li><a href="#">Film Photography</a></li>
+                                                <li><a href="#">Lighting & Studio</a></li>
                                             </ul>
                                         </li>
                                         <li class="cat-item has-children mega-menu">
-                                            <a href="~/assets/#">Biographies</a>
+                                            <a href="#">Biographies</a>
                                             <ul class="sub-menu">
                                                 <li class="single-block">
                                                     <h3 class="title">WHEEL SIMULATORS</h3>
                                                     <ul>
-                                                        <li><a href="~/assets/#">Bags & Cases</a></li>
-                                                        <li><a href="~/assets/#">Binoculars & Scopes</a></li>
-                                                        <li><a href="~/assets/#">Digital Cameras</a></li>
-                                                        <li><a href="~/assets/#">Film Photography</a></li>
-                                                        <li><a href="~/assets/#">Lighting & Studio</a></li>
+                                                        <li><a href="#">Bags & Cases</a></li>
+                                                        <li><a href="#">Binoculars & Scopes</a></li>
+                                                        <li><a href="#">Digital Cameras</a></li>
+                                                        <li><a href="#">Film Photography</a></li>
+                                                        <li><a href="#">Lighting & Studio</a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="single-block">
                                                     <h3 class="title">WHEEL SIMULATORS</h3>
                                                     <ul>
-                                                        <li><a href="~/assets/#">Bags & Cases</a></li>
-                                                        <li><a href="~/assets/#">Binoculars & Scopes</a></li>
-                                                        <li><a href="~/assets/#">Digital Cameras</a></li>
-                                                        <li><a href="~/assets/#">Film Photography</a></li>
-                                                        <li><a href="~/assets/#">Lighting & Studio</a></li>
+                                                        <li><a href="#">Bags & Cases</a></li>
+                                                        <li><a href="#">Binoculars & Scopes</a></li>
+                                                        <li><a href="#">Digital Cameras</a></li>
+                                                        <li><a href="#">Film Photography</a></li>
+                                                        <li><a href="#">Lighting & Studio</a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="single-block">
                                                     <h3 class="title">WHEEL SIMULATORS</h3>
                                                     <ul>
-                                                        <li><a href="~/assets/#">Bags & Cases</a></li>
-                                                        <li><a href="~/assets/#">Binoculars & Scopes</a></li>
-                                                        <li><a href="~/assets/#">Digital Cameras</a></li>
-                                                        <li><a href="~/assets/#">Film Photography</a></li>
-                                                        <li><a href="~/assets/#">Lighting & Studio</a></li>
+                                                        <li><a href="#">Bags & Cases</a></li>
+                                                        <li><a href="#">Binoculars & Scopes</a></li>
+                                                        <li><a href="#">Digital Cameras</a></li>
+                                                        <li><a href="#">Film Photography</a></li>
+                                                        <li><a href="#">Lighting & Studio</a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="single-block">
                                                     <h3 class="title">WHEEL SIMULATORS</h3>
                                                     <ul>
-                                                        <li><a href="~/assets/#">Bags & Cases</a></li>
-                                                        <li><a href="~/assets/#">Binoculars & Scopes</a></li>
-                                                        <li><a href="~/assets/#">Digital Cameras</a></li>
-                                                        <li><a href="~/assets/#">Film Photography</a></li>
-                                                        <li><a href="~/assets/#">Lighting & Studio</a></li>
+                                                        <li><a href="#">Bags & Cases</a></li>
+                                                        <li><a href="#">Binoculars & Scopes</a></li>
+                                                        <li><a href="#">Digital Cameras</a></li>
+                                                        <li><a href="#">Film Photography</a></li>
+                                                        <li><a href="#">Lighting & Studio</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li class="cat-item has-children">
-                                            <a href="~/assets/#">Business & Money</a>
+                                            <a href="#">Business & Money</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/#">Brake Tools</a></li>
-                                                <li><a href="~/assets/#">Driveshafts</a></li>
-                                                <li><a href="~/assets/#">Emergency Brake</a></li>
-                                                <li><a href="~/assets/#">Spools</a></li>
+                                                <li><a href="#">Brake Tools</a></li>
+                                                <li><a href="#">Driveshafts</a></li>
+                                                <li><a href="#">Emergency Brake</a></li>
+                                                <li><a href="#">Spools</a></li>
                                             </ul>
                                         </li>
                                         <li class="cat-item has-children">
-                                            <a href="~/assets/#">Calendars</a>
+                                            <a href="#">Calendars</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/#">Brake Tools</a></li>
-                                                <li><a href="~/assets/#">Driveshafts</a></li>
-                                                <li><a href="~/assets/#">Emergency Brake</a></li>
-                                                <li><a href="~/assets/#">Spools</a></li>
+                                                <li><a href="#">Brake Tools</a></li>
+                                                <li><a href="#">Driveshafts</a></li>
+                                                <li><a href="#">Emergency Brake</a></li>
+                                                <li><a href="#">Spools</a></li>
                                             </ul>
                                         </li>
                                         <li class="cat-item has-children">
-                                            <a href="~/assets/#">Children's Books</a>
+                                            <a href="#">Children's Books</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/#">Brake Tools</a></li>
-                                                <li><a href="~/assets/#">Driveshafts</a></li>
-                                                <li><a href="~/assets/#">Emergency Brake</a></li>
-                                                <li><a href="~/assets/#">Spools</a></li>
+                                                <li><a href="#">Brake Tools</a></li>
+                                                <li><a href="#">Driveshafts</a></li>
+                                                <li><a href="#">Emergency Brake</a></li>
+                                                <li><a href="#">Spools</a></li>
                                             </ul>
                                         </li>
                                         <li class="cat-item has-children">
-                                            <a href="~/assets/#">Comics</a>
+                                            <a href="#">Comics</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/#">Brake Tools</a></li>
-                                                <li><a href="~/assets/#">Driveshafts</a></li>
-                                                <li><a href="~/assets/#">Emergency Brake</a></li>
-                                                <li><a href="~/assets/#">Spools</a></li>
+                                                <li><a href="#">Brake Tools</a></li>
+                                                <li><a href="#">Driveshafts</a></li>
+                                                <li><a href="#">Emergency Brake</a></li>
+                                                <li><a href="#">Spools</a></li>
                                             </ul>
                                         </li>
-                                        <li class="cat-item"><a href="~/assets/#">Perfomance Filters</a></li>
+                                        <li class="cat-item"><a href="#">Perfomance Filters</a></li>
                                         <li class="cat-item has-children">
-                                            <a href="~/assets/#">Cookbooks</a>
+                                            <a href="#">Cookbooks</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/#">Brake Tools</a></li>
-                                                <li><a href="~/assets/#">Driveshafts</a></li>
-                                                <li><a href="~/assets/#">Emergency Brake</a></li>
-                                                <li><a href="~/assets/#">Spools</a></li>
+                                                <li><a href="#">Brake Tools</a></li>
+                                                <li><a href="#">Driveshafts</a></li>
+                                                <li><a href="#">Emergency Brake</a></li>
+                                                <li><a href="#">Spools</a></li>
                                             </ul>
                                         </li>
-                                        <li class="cat-item "><a href="~/assets/#">Accessories</a></li>
-                                        <li class="cat-item "><a href="~/assets/#">Education</a></li>
-                                        <li class="cat-item hidden-menu-item"><a href="~/assets/#">Indoor Living</a></li>
+                                        <li class="cat-item "><a href="#">Accessories</a></li>
+                                        <li class="cat-item "><a href="#">Education</a></li>
+                                        <li class="cat-item hidden-menu-item"><a href="#">Indoor Living</a></li>
                                         <li class="cat-item">
-                                            <a href="~/assets/#" class="js-expand-hidden-menu">
+                                            <a href="#" class="js-expand-hidden-menu">
                                                 More
                                                 Categories
                                             </a>
@@ -435,10 +439,10 @@
                             <div class="mobile-header-btns header-top-widget">
                                 <ul class="header-links">
                                     <li class="sin-link">
-                                        <a href="~/assets/cart.html" class="cart-link link-icon"><i class="ion-bag"></i></a>
+                                        <a href="cart.html" class="cart-link link-icon"><i class="ion-bag"></i></a>
                                     </li>
                                     <li class="sin-link">
-                                        <a href="~/assets/javascript:" class="link-icon hamburgur-icon off-canvas-btn">
+                                        <a href="javascript:" class="link-icon hamburgur-icon off-canvas-btn">
                                             <i class="ion-navicon"></i>
                                         </a>
                                     </li>
@@ -468,78 +472,78 @@
                         <nav class="off-canvas-nav">
                             <ul class="mobile-menu main-mobile-menu">
                                 <li class="menu-item-has-children">
-                                    <a href="~/assets/#">Home</a>
+                                    <a href="#">Home</a>
                                     <ul class="sub-menu">
-                                        <li> <a href="~/assets/index.html">Home One</a></li>
-                                        <li> <a href="~/assets/index-2.html">Home Two</a></li>
-                                        <li> <a href="~/assets/index-3.html">Home Three</a></li>
-                                        <li> <a href="~/assets/index-4.html">Home Four</a></li>
-                                        <li> <a href="~/assets/index-5.html">Home Five</a></li>
+                                        <li> <a href="index.html">Home One</a></li>
+                                        <li> <a href="index-2.html">Home Two</a></li>
+                                        <li> <a href="index-3.html">Home Three</a></li>
+                                        <li> <a href="index-4.html">Home Four</a></li>
+                                        <li> <a href="index-5.html">Home Five</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="~/assets/#">Blog</a>
+                                    <a href="#">Blog</a>
                                     <ul class="sub-menu">
                                         <li class="menu-item-has-children">
-                                            <a href="~/assets/#">Blog Grid</a>
+                                            <a href="#">Blog Grid</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/blog.html">Full Widh (Default)</a></li>
-                                                <li><a href="~/assets/blog-left-sidebar.html">left Sidebar</a></li>
-                                                <li><a href="~/assets/blog-right-sidebar.html">Right Sidebar</a></li>
+                                                <li><a href="blog.html">Full Widh (Default)</a></li>
+                                                <li><a href="blog-left-sidebar.html">left Sidebar</a></li>
+                                                <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
                                             </ul>
                                         </li>
                                         <li class="menu-item-has-children">
-                                            <a href="~/assets/#">Blog List</a>
+                                            <a href="#">Blog List</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/blog-list.html">Full Widh (Default)</a></li>
-                                                <li><a href="~/assets/blog-list-left-sidebar.html">left Sidebar</a></li>
-                                                <li><a href="~/assets/blog-list-right-sidebar.html">Right Sidebar</a></li>
+                                                <li><a href="blog-list.html">Full Widh (Default)</a></li>
+                                                <li><a href="blog-list-left-sidebar.html">left Sidebar</a></li>
+                                                <li><a href="blog-list-right-sidebar.html">Right Sidebar</a></li>
                                             </ul>
                                         </li>
                                         <li class="menu-item-has-children">
-                                            <a href="~/assets/#">Blog Details</a>
+                                            <a href="#">Blog Details</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/blog-details.html">Image Format (Default)</a></li>
-                                                <li><a href="~/assets/blog-details-gallery.html">Gallery Format</a></li>
-                                                <li><a href="~/assets/blog-details-audio.html">Audio Format</a></li>
-                                                <li><a href="~/assets/blog-details-video.html">Video Format</a></li>
-                                                <li><a href="~/assets/blog-details-left-sidebar.html">left Sidebar</a></li>
+                                                <li><a href="blog-details.html">Image Format (Default)</a></li>
+                                                <li><a href="blog-details-gallery.html">Gallery Format</a></li>
+                                                <li><a href="blog-details-audio.html">Audio Format</a></li>
+                                                <li><a href="blog-details-video.html">Video Format</a></li>
+                                                <li><a href="blog-details-left-sidebar.html">left Sidebar</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="~/assets/#">Shop</a>
+                                    <a href="#">Shop</a>
                                     <ul class="sub-menu">
                                         <li class="menu-item-has-children">
-                                            <a href="~/assets/#">Shop Grid</a>
+                                            <a href="#">Shop Grid</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/shop-grid.html">Fullwidth</a></li>
-                                                <li><a href="~/assets/shop-grid-left-sidebar.html">left Sidebar</a></li>
-                                                <li><a href="~/assets/shop-grid-right-sidebar.html">Right Sidebar</a></li>
+                                                <li><a href="shop-grid.html">Fullwidth</a></li>
+                                                <li><a href="shop-grid-left-sidebar.html">left Sidebar</a></li>
+                                                <li><a href="shop-grid-right-sidebar.html">Right Sidebar</a></li>
                                             </ul>
                                         </li>
                                         <li class="menu-item-has-children">
-                                            <a href="~/assets/#">Shop List</a>
+                                            <a href="#">Shop List</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/shop-list.html">Fullwidth</a></li>
-                                                <li><a href="~/assets/shop-list-left-sidebar.html">left Sidebar</a></li>
-                                                <li><a href="~/assets/shop-list-right-sidebar.html">Right Sidebar</a></li>
+                                                <li><a href="shop-list.html">Fullwidth</a></li>
+                                                <li><a href="shop-list-left-sidebar.html">left Sidebar</a></li>
+                                                <li><a href="shop-list-right-sidebar.html">Right Sidebar</a></li>
                                             </ul>
                                         </li>
                                         <li class="menu-item-has-children">
-                                            <a href="~/assets/#">Product Details 1</a>
+                                            <a href="#">Product Details 1</a>
                                             <ul class="sub-menu">
-                                                <li><a href="~/assets/product-details.html">Product Details Page</a></li>
+                                                <li><a href="product-details.html">Product Details Page</a></li>
                                                 <li>
-                                                    <a href="~/assets/product-details-affiliate.html">
+                                                    <a href="product-details-affiliate.html">
                                                         Product Details
                                                         Affiliate
                                                     </a>
                                                 </li>
-                                                <li><a href="~/assets/product-details-group.html">Product Details Group</a></li>
+                                                <li><a href="product-details-group.html">Product Details Group</a></li>
                                                 <li>
-                                                    <a href="~/assets/product-details-variable.html">
+                                                    <a href="product-details-variable.html">
                                                         Product Details
                                                         Variables
                                                     </a>
@@ -547,35 +551,35 @@
                                             </ul>
                                         </li>
                                         <li class="menu-item-has-children">
-                                            <a href="~/assets/#">Product Details 2</a>
+                                            <a href="#">Product Details 2</a>
                                             <ul class="sub-menu">
                                                 <li>
-                                                    <a href="~/assets/product-details-left-thumbnail.html">left Thumbnail</a>
+                                                    <a href="product-details-left-thumbnail.html">left Thumbnail</a>
                                                 </li>
                                                 <li>
-                                                    <a href="~/assets/product-details-right-thumbnail.html">Right Thumbnail</a>
+                                                    <a href="product-details-right-thumbnail.html">Right Thumbnail</a>
                                                 </li>
-                                                <li><a href="~/assets/product-details-left-gallery.html">Left Gallery</a></li>
-                                                <li><a href="~/assets/product-details-right-gallery.html">Right Gallery</a></li>
+                                                <li><a href="product-details-left-gallery.html">Left Gallery</a></li>
+                                                <li><a href="product-details-right-gallery.html">Right Gallery</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="~/assets/#">Pages</a>
+                                    <a href="#">Pages</a>
                                     <ul class="sub-menu">
-                                        <li><a href="~/assets/cart.html">Cart</a></li>
-                                        <li><a href="~/assets/checkout.html">Checkout</a></li>
-                                        <li><a href="~/assets/compare.html">Compare</a></li>
-                                        <li><a href="~/assets/wishlist.html">Wishlist</a></li>
-                                        <li><a href="~/assets/login-register.html">Login Register</a></li>
-                                        <li><a href="~/assets/my-account.html">My Account</a></li>
-                                        <li><a href="~/assets/order-complete.html">Order Complete</a></li>
-                                        <li><a href="~/assets/faq.html">Faq</a></li>
-                                        <li><a href="~/assets/contact-2.html">contact 02</a></li>
+                                        <li><a href="cart.html">Cart</a></li>
+                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a href="compare.html">Compare</a></li>
+                                        <li><a href="wishlist.html">Wishlist</a></li>
+                                        <li><a href="login-register.html">Login Register</a></li>
+                                        <li><a href="my-account.html">My Account</a></li>
+                                        <li><a href="order-complete.html">Order Complete</a></li>
+                                        <li><a href="faq.html">Faq</a></li>
+                                        <li><a href="contact-2.html">contact 02</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="~/assets/contact.html">Contact</a></li>
+                                <li><a href="contact.html">Contact</a></li>
                             </ul>
                         </nav>
                         <!-- mobile menu navigation end -->
@@ -630,7 +634,7 @@
             <div class="container d-none d-lg-block">
                 <div class="row align-items-center">
                     <div class="col-lg-4">
-                        <a href="~/assets/index.html" class="site-brand">
+                        <a href="index.html" class="site-brand">
                             <img src="~/assets/image/logo.png" alt="">
                         </a>
                     </div>
@@ -638,54 +642,54 @@
                         <div class="main-navigation flex-lg-right">
                             <ul class="main-menu menu-right ">
                                 <li class="menu-item has-children">
-                                    <a href="~/assets/javascript:void(0)">
+                                    <a href="javascript:void(0)">
                                         Home <i class="fas fa-chevron-down dropdown-arrow"></i>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li> <a href="~/assets/index.html">Home One</a></li>
-                                        <li> <a href="~/assets/index-2.html">Home Two</a></li>
-                                        <li> <a href="~/assets/index-3.html">Home Three</a></li>
-                                        <li> <a href="~/assets/index-4.html">Home Four</a></li>
-                                        <li> <a href="~/assets/index-5.html">Home Five</a></li>
+                                        <li> <a href="index.html">Home One</a></li>
+                                        <li> <a href="index-2.html">Home Two</a></li>
+                                        <li> <a href="index-3.html">Home Three</a></li>
+                                        <li> <a href="index-4.html">Home Four</a></li>
+                                        <li> <a href="index-5.html">Home Five</a></li>
                                     </ul>
                                 </li>
                                 <!-- Shop -->
                                 <li class="menu-item has-children mega-menu">
-                                    <a href="~/assets/javascript:void(0)">
+                                    <a href="javascript:void(0)">
                                         shop <i class="fas fa-chevron-down dropdown-arrow"></i>
                                     </a>
                                     <ul class="sub-menu four-column">
                                         <li class="cus-col-25">
-                                            <h3 class="menu-title"><a href="~/assets/javascript:void(0)">Shop Grid </a></h3>
+                                            <h3 class="menu-title"><a href="javascript:void(0)">Shop Grid </a></h3>
                                             <ul class="mega-single-block">
-                                                <li><a href="~/assets/shop-grid.html">Fullwidth</a></li>
-                                                <li><a href="~/assets/shop-grid-left-sidebar.html">left Sidebar</a></li>
-                                                <li><a href="~/assets/shop-grid-right-sidebar.html">Right Sidebar</a></li>
+                                                <li><a href="shop-grid.html">Fullwidth</a></li>
+                                                <li><a href="shop-grid-left-sidebar.html">left Sidebar</a></li>
+                                                <li><a href="shop-grid-right-sidebar.html">Right Sidebar</a></li>
                                             </ul>
                                         </li>
                                         <li class="cus-col-25">
-                                            <h3 class="menu-title"> <a href="~/assets/javascript:void(0)">Shop List</a></h3>
+                                            <h3 class="menu-title"> <a href="javascript:void(0)">Shop List</a></h3>
                                             <ul class="mega-single-block">
-                                                <li><a href="~/assets/shop-list.html">Fullwidth</a></li>
-                                                <li><a href="~/assets/shop-list-left-sidebar.html">left Sidebar</a></li>
-                                                <li><a href="~/assets/shop-list-right-sidebar.html">Right Sidebar</a></li>
+                                                <li><a href="shop-list.html">Fullwidth</a></li>
+                                                <li><a href="shop-list-left-sidebar.html">left Sidebar</a></li>
+                                                <li><a href="shop-list-right-sidebar.html">Right Sidebar</a></li>
                                             </ul>
                                         </li>
                                         <li class="cus-col-25">
                                             <h3 class="menu-title">
-                                                <a href="~/assets/javascript:void(0)">Product Details 1</a>
+                                                <a href="javascript:void(0)">Product Details 1</a>
                                             </h3>
                                             <ul class="mega-single-block">
-                                                <li><a href="~/assets/product-details.html">Product Details Page</a></li>
+                                                <li><a href="product-details.html">Product Details Page</a></li>
                                                 <li>
-                                                    <a href="~/assets/product-details-affiliate.html">
+                                                    <a href="product-details-affiliate.html">
                                                         Product Details
                                                         Affiliate
                                                     </a>
                                                 </li>
-                                                <li><a href="~/assets/product-details-group.html">Product Details Group</a></li>
+                                                <li><a href="product-details-group.html">Product Details Group</a></li>
                                                 <li>
-                                                    <a href="~/assets/product-details-variable.html">
+                                                    <a href="product-details-variable.html">
                                                         Product Details
                                                         Variables
                                                     </a>
@@ -694,74 +698,74 @@
                                         </li>
                                         <li class="cus-col-25">
                                             <h3 class="menu-title">
-                                                <a href="~/assets/javascript:void(0)">Product Details 2</a>
+                                                <a href="javascript:void(0)">Product Details 2</a>
                                             </h3>
                                             <ul class="mega-single-block">
                                                 <li>
-                                                    <a href="~/assets/product-details-left-thumbnail.html">left Thumbnail</a>
+                                                    <a href="product-details-left-thumbnail.html">left Thumbnail</a>
                                                 </li>
                                                 <li>
-                                                    <a href="~/assets/product-details-right-thumbnail.html">Right Thumbnail</a>
+                                                    <a href="product-details-right-thumbnail.html">Right Thumbnail</a>
                                                 </li>
-                                                <li><a href="~/assets/product-details-left-gallery.html">Left Gallery</a></li>
-                                                <li><a href="~/assets/product-details-right-gallery.html">Right Gallery</a></li>
+                                                <li><a href="product-details-left-gallery.html">Left Gallery</a></li>
+                                                <li><a href="product-details-right-gallery.html">Right Gallery</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <!-- Pages -->
                                 <li class="menu-item has-children">
-                                    <a href="~/assets/javascript:void(0)">
+                                    <a href="javascript:void(0)">
                                         Pages <i class="fas fa-chevron-down dropdown-arrow"></i>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li><a href="~/assets/cart.html">Cart</a></li>
-                                        <li><a href="~/assets/checkout.html">Checkout</a></li>
-                                        <li><a href="~/assets/compare.html">Compare</a></li>
-                                        <li><a href="~/assets/wishlist.html">Wishlist</a></li>
-                                        <li><a href="~/assets/login-register.html">Login Register</a></li>
-                                        <li><a href="~/assets/my-account.html">My Account</a></li>
-                                        <li><a href="~/assets/order-complete.html">Order Complete</a></li>
-                                        <li><a href="~/assets/faq.html">Faq</a></li>
-                                        <li><a href="~/assets/contact-2.html">contact 02</a></li>
+                                        <li><a href="cart.html">Cart</a></li>
+                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a href="compare.html">Compare</a></li>
+                                        <li><a href="wishlist.html">Wishlist</a></li>
+                                        <li><a href="login-register.html">Login Register</a></li>
+                                        <li><a href="my-account.html">My Account</a></li>
+                                        <li><a href="order-complete.html">Order Complete</a></li>
+                                        <li><a href="faq.html">Faq</a></li>
+                                        <li><a href="contact-2.html">contact 02</a></li>
                                     </ul>
                                 </li>
                                 <!-- Blog -->
                                 <li class="menu-item has-children mega-menu">
-                                    <a href="~/assets/javascript:void(0)">
+                                    <a href="javascript:void(0)">
                                         Blog <i class="fas fa-chevron-down dropdown-arrow"></i>
                                     </a>
                                     <ul class="sub-menu three-column">
                                         <li class="cus-col-33">
-                                            <h3 class="menu-title"><a href="~/assets/javascript:void(0)">Blog Grid</a></h3>
+                                            <h3 class="menu-title"><a href="javascript:void(0)">Blog Grid</a></h3>
                                             <ul class="mega-single-block">
-                                                <li><a href="~/assets/blog.html">Full Widh (Default)</a></li>
-                                                <li><a href="~/assets/blog-left-sidebar.html">left Sidebar</a></li>
-                                                <li><a href="~/assets/blog-right-sidebar.html">Right Sidebar</a></li>
+                                                <li><a href="blog.html">Full Widh (Default)</a></li>
+                                                <li><a href="blog-left-sidebar.html">left Sidebar</a></li>
+                                                <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
                                             </ul>
                                         </li>
                                         <li class="cus-col-33">
-                                            <h3 class="menu-title"><a href="~/assets/javascript:void(0)">Blog List </a></h3>
+                                            <h3 class="menu-title"><a href="javascript:void(0)">Blog List </a></h3>
                                             <ul class="mega-single-block">
                                                 <!-- <li><a href="~/assets/blog-list.html">Full Widh (Default)</a></li> -->
-                                                <li><a href="~/assets/blog-list-left-sidebar.html">left Sidebar</a></li>
-                                                <li><a href="~/assets/blog-list-right-sidebar.html">Right Sidebar</a></li>
+                                               <li><a href="blog-list-left-sidebar.html">left Sidebar</a></li>
+                                                <li><a href="blog-list-right-sidebar.html">Right Sidebar</a></li>
                                             </ul>
                                         </li>
                                         <li class="cus-col-33">
                                             <h3 class="menu-title"><a href="~/assets/javascript:void(0)">Blog Details</a></h3>
                                             <ul class="mega-single-block">
-                                                <li><a href="~/assets/blog-details.html">Image Format (Default)</a></li>
-                                                <li><a href="~/assets/blog-details-gallery.html">Gallery Format</a></li>
-                                                <li><a href="~/assets/blog-details-audio.html">Audio Format</a></li>
-                                                <li><a href="~/assets/blog-details-video.html">Video Format</a></li>
-                                                <li><a href="~/assets/blog-details-left-sidebar.html">left Sidebar</a></li>
+                                                <li><a href="blog-details.html">Image Format (Default)</a></li>
+                                                <li><a href="blog-details-gallery.html">Gallery Format</a></li>
+                                                <li><a href="blog-details-audio.html">Audio Format</a></li>
+                                                <li><a href="blog-details-video.html">Video Format</a></li>
+                                                <li><a href="blog-details-left-sidebar.html">left Sidebar</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="~/assets/contact.html">Contact</a>
+                                    <a href="contact.html">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -770,22 +774,16 @@
             </div>
         </div>
 
-
         @RenderBody()
-
-
-
-        <!--=================================
-        Footer
-        ===================================== -->
-        <!-- Modal -->
-        <div class="modal fade modal-quick-view" id="quickModal" tabindex="-1" role="dialog"
-             aria-labelledby="quickModal" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                </div>
-            </div>
         </div>
+        
+
+
+        
+
+
+
+        
 
         <!--=================================
         Brands Slider
@@ -861,11 +859,11 @@
                                 <h3>Information</h3>
                             </div>
                             <ul class="footer-list normal-list">
-                                <li><a href="~/assets/#">Prices drop</a></li>
-                                <li><a href="~/assets/#">New products</a></li>
-                                <li><a href="~/assets/#">Best sales</a></li>
-                                <li><a href="~/assets/#">Contact us</a></li>
-                                <li><a href="~/assets/#">Sitemap</a></li>
+                                <li><a href="#">Prices drop</a></li>
+                            <li><a href="#">New products</a></li>
+                            <li><a href="#">Best sales</a></li>
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">Sitemap</a></li>
                             </ul>
                         </div>
                     </div>
@@ -875,11 +873,11 @@
                                 <h3>Extras</h3>
                             </div>
                             <ul class="footer-list normal-list">
-                                <li><a href="~/assets/#">Delivery</a></li>
-                                <li><a href="~/assets/#">About Us</a></li>
-                                <li><a href="~/assets/#">Stores</a></li>
-                                <li><a href="~/assets/#">Contact us</a></li>
-                                <li><a href="~/assets/#">Sitemap</a></li>
+                                <li><a href="#">Delivery</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Stores</a></li>
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">Sitemap</a></li>
                             </ul>
                         </div>
                     </div>
@@ -897,15 +895,15 @@
                             <h3 class="title">STAY CONNECTED</h3>
                             <ul class="social-list list-inline">
                                 <li class="single-social facebook">
-                                    <a href="~/assets/#"><i class="ion ion-social-facebook"></i></a>
+                                    <a href="#"><i class="ion ion-social-facebook"></i></a>
                                 </li>
-                                <li class="single-social twitter"><a href="~/assets/#"><i class="ion ion-social-twitter"></i></a></li>
+                                <li class="single-social twitter"><a href="#"><i class="ion ion-social-twitter"></i></a></li>
                                 <li class="single-social google">
-                                    <a href="~/assets/#">
+                                    <a href="#">
                                         <i class="ion ion-social-googleplus-outline"></i>
                                     </a>
                                 </li>
-                                <li class="single-social youtube"><a href="~/assets/#"><i class="ion ion-social-youtube"></i></a></li>
+                                <li class="single-social youtube"><a href="#"><i class="ion ion-social-youtube"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -918,11 +916,11 @@
                         vel
                         magna volutpat, posuere eros
                     </p>
-                    <a href="~/assets/#" class="payment-block">
+                    <a href="#" class="payment-block">
                         <img src="~/assets/image/icon/payment.png" alt="">
                     </a>
                     <p class="copyright-text">
-                        Copyright © 2019 <a href="~/assets/#" class="author">Pustok</a>. All Right Reserved.
+                        Copyright © 2019 <a href="#" class="author">Pustok</a>. All Right Reserved.
                         <br>
                         Design By Pustok
                     </p>

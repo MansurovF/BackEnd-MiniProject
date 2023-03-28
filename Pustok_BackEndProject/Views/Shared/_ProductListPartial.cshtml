@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Product>
+
 <div class="product-slider multiple-row  slider-border-multiple-row  sb-slick-slider"
      data-slick-setting='{
                             "autoplay": true,
@@ -19,22 +20,22 @@
             <div class="single-slide">
                 <div class="product-card">
                     <div class="product-header">
-                        <a href="~/assets/#" class="author">
-                            jpple
+                        <a href="#" class="author">
+                            @product.Author.Name
                         </a>
                         <h3>
-                            <a href="~/assets/product-details.html"> @product.Title</a>
+                            <a href="product-details.html"> @product.Title</a>
                         </h3>
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
                             <img src="~/assets/image/products/@product.MainImage" alt="">
                             <div class="hover-contents">
-                                <a href="~/assets/product-details.html" class="hover-image">
+                                <a href="product-details.html" class="hover-image">
                                     <img src="~/assets/image/products/@product.HoverImage" alt="">
                                 </a>
                                 <div class="hover-btns">
-                                    <a href="~/assets/cart.html" class="single-btn">
+                                    <a asp-action="addbasket" asp-controller="basket" asp-route-id="@product.Id" class="single-btn">
                                         <i class="fas fa-shopping-basket"></i>
                                     </a>
                                     <a href="~/assets/wishlist.html" class="single-btn">
@@ -43,7 +44,7 @@
                                     <a href="~/assets/compare.html" class="single-btn">
                                         <i class="fas fa-random"></i>
                                     </a>
-                                    <a href="~/assets/#" asp-controller="Product"  asp-action="Modal" asp-route-id="@product.Id" data-toggle="modal" data-target="#quickModal"
+                                    <a  asp-controller="Product"  asp-action="Modal" asp-route-id="@product.Id" data-toggle="modal" data-target="#quickModal"
                                class="single-btn">
                                         <i class="fas fa-eye"></i>
                                     </a>
