@@ -28,7 +28,7 @@
 									{
 										<tr>
 											<td class="pro-remove element-delet">
-												<a asp-action="removebasket" asp-controller="basket" asp-route-id="@basketVM.Id"><i class="far fa-trash-alt"></i></a>
+												<a class="rmvproduct" asp-action="removebasket" asp-controller="basket" asp-route-id="@basketVM.Id"><i class="far fa-trash-alt"></i></a>
 											</td>
 											<td class="pro-thumbnail">
 												<a href="#">
@@ -42,7 +42,7 @@
 													<div class="count-input-block">
 														<a class="basket-decrease" asp-controller="basket" asp-route-id="@basketVM.Id" asp-action="decreasebasket" class="sub fancybox-button">-</a>
 														<input type="text"  disabled value="@basketVM.Count"/>
-														<a class="basket-increase" asp-controller="basket" asp-route-id="@basketVM.Id" asp-action="addbasket" class="add fancybox-button">+</a>
+														<a class="basket-increase" asp-controller="basket" asp-route-id="@basketVM.Id" asp-action="addbasket" class="addbasket fancybox-button">+</a>
 													</div>
 												</div>
 											</td>
@@ -117,11 +117,11 @@
 									<div class="card-image">
 										<img src="image/products/product-10.jpg" alt="">
 										<div class="hover-contents">
-											<a href="product-details.html" class="hover-image">
+											<a  href="product-details.html" class="hover-image">
 												<img src="image/products/product-1.jpg" alt="">
 											</a>
 											<div class="hover-btns">
-												<a href="cart.html" class="single-btn">
+												<a href="cart.html" class="addbasket">
 													<i class="fas fa-shopping-basket"></i>
 												</a>
 												<a href="wishlist.html" class="single-btn">

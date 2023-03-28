@@ -23,11 +23,11 @@
             <tbody>
                 @foreach (Brand brand in Model )
                 {
-                    count ++
+                    count++;
                     <tr>
                         <td>@count</td>
                         <td>@brand.Name</td>
-                        <td>@brand.CreatedAt?.ToString("dd-MMM-yyyy").ToUpper()</td>
+                        <td>@brand.CreatedAt.ToString("dd-MMM-yyyy").ToUpper()</td>
                         <td>@brand.CreatedBy</td>
                         <td>@brand.Products?.Count()</td>
                     </tr>

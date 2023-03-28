@@ -38,8 +38,6 @@ namespace Pustok_BackEndProject.Controllers
 					}
 				}
 			}
-
-
 			return View(basketVMs); ;
 		}
 		public async Task<IActionResult> RemoveBasket(int? Id)
@@ -105,12 +103,11 @@ namespace Pustok_BackEndProject.Controllers
 				{
 					basketVMs.Add(new BasketVM { Id = (int)Id, Count = 1 });
 				};
-
 			}
 
 			cookie = JsonConvert.SerializeObject(basketVMs);
 			HttpContext.Response.Cookies.Append("basket", cookie);
-
+				
 			foreach (BasketVM basketVM in basketVMs)
 			{
 				Product product = await _context.Products.FirstOrDefaultAsync(p => p.IsDeleted == false && p.Id == basketVM.Id);

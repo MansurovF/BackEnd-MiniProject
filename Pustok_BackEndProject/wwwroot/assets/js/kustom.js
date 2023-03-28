@@ -53,10 +53,23 @@
         }
 
     })
-
-    $('.addbasket').click(function (e) {
+    $(document).on("click", '.rmvproduct', function (e) {
         e.preventDefault();
 
+        let url =$(this).attr('href')
+
+        fetch(url)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('.rmvproduct').html(data)
+            })
+    })
+
+    $(document).on("click", ' .addbasket' , function (e) {
+        console.log("asdasds")
+        e.preventDefault();
+        
         let url = $(this).attr('href');
 
         fetch(url)

@@ -17,6 +17,7 @@ namespace Pustok_BackEndProject.DataAccessLayer
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductTag> ProductTags { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Basket> Baskets  { get; set; }
 
     }
 }
