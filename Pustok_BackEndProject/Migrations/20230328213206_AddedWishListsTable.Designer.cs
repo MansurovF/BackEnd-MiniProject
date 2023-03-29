@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pustok_BackEndProject.DataAccessLayer;
 
@@ -11,9 +12,10 @@ using Pustok_BackEndProject.DataAccessLayer;
 namespace Pustok_BackEndProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230328213206_AddedWishListsTable")]
+    partial class AddedWishListsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -631,7 +633,7 @@ namespace Pustok_BackEndProject.Migrations
                         .HasForeignKey("BrandId");
 
                     b.HasOne("Pustok_BackEndProject.Models.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Author");
@@ -688,8 +690,6 @@ namespace Pustok_BackEndProject.Migrations
             modelBuilder.Entity("Pustok_BackEndProject.Models.Category", b =>
                 {
                     b.Navigation("Children");
-
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Pustok_BackEndProject.Models.Product", b =>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QD6inE9dxBQyb0gYRlY7925U9Bc8UP46DmkG23hK4UQ=",
+  "Hash": "ETNPE+XMC7GOsCSN6A9D9TiIRdR2d3Z6VYY6hPLnHJU=",
   "Source": "Pustok_BackEndProject",
   "BasePath": "_content/Pustok_BackEndProject",
   "Mode": "Default",
@@ -1902,6 +1902,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\manage\\img\\undraw_rocket.svg"
+    },
+    {
+      "Identity": "C:\\Users\\LENOVO\\Desktop\\Pustok_BackEndProject\\Pustok_BackEndProject\\wwwroot\\manage\\js\\custom.js",
+      "SourceId": "Pustok_BackEndProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\LENOVO\\Desktop\\Pustok_BackEndProject\\Pustok_BackEndProject\\wwwroot\\",
+      "BasePath": "_content/Pustok_BackEndProject",
+      "RelativePath": "manage/js/custom.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\manage\\js\\custom.js"
     },
     {
       "Identity": "C:\\Users\\LENOVO\\Desktop\\Pustok_BackEndProject\\Pustok_BackEndProject\\wwwroot\\manage\\js\\demo\\chart-area-demo.js",

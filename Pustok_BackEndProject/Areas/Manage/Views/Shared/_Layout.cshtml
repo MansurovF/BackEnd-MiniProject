@@ -16,6 +16,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="~/manage/css/sb-admin-2.min.css" rel="stylesheet">
@@ -55,6 +56,12 @@
                 <a class="nav-link" asp-area="manage" asp-controller="Brand" asp-action="index">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Brands</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" asp-area="manage" asp-controller="Category" asp-action="index">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Categories</span>
                 </a>
             </li>
             @*<li class="nav-item active">
@@ -341,6 +348,7 @@
 
     <!-- Core plugin JavaScript-->
     <script src="~/manage/vendor/jquery-easing/jquery.easing.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="~/manage/js/sb-admin-2.min.js"></script>
@@ -351,6 +359,7 @@
     <!-- Page level custom scripts -->
     <script src="~/manage/js/demo/chart-area-demo.js"></script>
     <script src="~/manage/js/demo/chart-pie-demo.js"></script>
+    <script src="~/manage/js/custom.js"></script>
 
 </body>
 

@@ -445,6 +445,10 @@
       "PackagePath": "staticwebassets\\manage\\img\\undraw_rocket.svg"
     },
     {
+      "Id": "C:\\Users\\LENOVO\\Desktop\\Pustok_BackEndProject\\Pustok_BackEndProject\\wwwroot\\manage\\js\\custom.js",
+      "PackagePath": "staticwebassets\\manage\\js\\custom.js"
+    },
+    {
       "Id": "C:\\Users\\LENOVO\\Desktop\\Pustok_BackEndProject\\Pustok_BackEndProject\\wwwroot\\manage\\js\\demo\\chart-area-demo.js",
       "PackagePath": "staticwebassets\\manage\\js\\demo\\chart-area-demo.js"
     },
