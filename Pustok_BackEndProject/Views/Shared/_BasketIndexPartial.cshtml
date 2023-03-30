@@ -40,7 +40,7 @@
 											<td class="pro-quantity">
 												<div class="pro-qty">
 													<div class="count-input-block">
-														<a class="basket-decrease" asp-controller="basket" asp-route-id="@basketVM.Id" asp-action="decreasebasket" class="sub fancybox-button">-</a>
+														<a class="basket-decrease" asp-controller="basket" asp-route-id="@basketVM.Id" asp-action="decreasebasket" class="sub fancybox-button " style="color:red; font-size:10px;font-weight:bolder;">-</a>
 														<input type="text"  disabled value="@basketVM.Count"/>
 														<a class="basket-increase" asp-controller="basket" asp-route-id="@basketVM.Id" asp-action="addbasket" class="addbasket fancybox-button">+</a>
 													</div>

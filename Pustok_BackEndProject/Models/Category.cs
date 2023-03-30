@@ -8,6 +8,7 @@ namespace Pustok_BackEndProject.Models
        
         [StringLength(255)]
         public string Name { get; set; }
+
         public bool IsMain { get; set; }
         public Nullable<int> ParentId { get; set; }
         public Category? Parent { get; set; }

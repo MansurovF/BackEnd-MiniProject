@@ -80,9 +80,9 @@
             })
     })
 
-    $(document).on("click", ' .product-close , .element-delet, .basket-decrease', function (e){
+    $(document).on("click", '  .element-delet, .basket-increase', function (e){
         e.stopPropagation();
-    e.preventDefault();
+        e.preventDefault();
         console.log(e.currentTarget)
 
         if (e.currentTarget.classList.contains('.product-close') || e.currentTarget.classList.contains('.element-delet')) {
@@ -125,5 +125,107 @@
                         })
                 })
         }
+
     })
+
+    $(document).on("click", '.basket-decrease', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+        console.log(e.currentTarget)
+
+        let url = $(this).attr('href');
+
+        fetch(url)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('.product-close').html(data)
+                console.log(url)
+                let url2 = "/" + url.split('/')[1] + "/mainbasket"
+                console.log(url2)
+                fetch(url2)
+                    .then(res2 => {
+                        return res2.text()
+                    })
+                    .then(data2 => {
+                        $('.cart-page').html(data2)
+                    })
+            })
+    })
+
+    $(document).on("click", '.rmvproduct', function (e) {
+        e.preventDefault();
+        console.log(e.currentTarget)
+
+        let url = $(this).attr('href');
+
+        fetch(url)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('.rmvproduct').html(data)
+                console.log(url)
+                let url2 = "/" + url.split('/')[1] + "/mainbasket"
+                console.log(url2)
+                fetch(url2)
+                    .then(res2 => {
+                        return res2.text()
+                    })
+                    .then(data2 => {
+                        $('.cart-page').html(data2)
+                    })
+            })
+
+
+    })
+    $(document).on("click", '.price', function (e) {
+        e.preventDefault();
+        console.log(e.currentTarget)
+
+        let url = $(this).attr('href');
+
+        fetch(url)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('.text-number').html(data)
+                console.log(url)
+                let url2 = "/" + url.split('/')[1] + "/mainbasket"
+                console.log(url2)
+                fetch(url2)
+                    .then(res2 => {
+                        return res2.text()
+                    })
+                    .then(data2 => {
+                        $('.cart-page').html(data2)
+                    })
+            })
+
+
+    })
+
+    $(document).on("click", '.product-close', function (e) {
+        e.preventDefault();
+        console.log(e.currentTarget)
+    console.log(e.currentTarget)
+
+        let url = $(this).attr('href');
+        fetch(url)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('.header-cart').html(data)
+                //console.log(url)
+                //let url2 = "/" + url.split('/')[1] + "/mainbasket"
+                //console.log(url2)
+                //fetch(url2)
+                //    .then(res2 => {
+                //        return res2.text()
+                //    })
+                //    .then(data2 => {
+                //        $('.cart-page').html(data2)
+                //    })
+            })
+    })
+    
 })

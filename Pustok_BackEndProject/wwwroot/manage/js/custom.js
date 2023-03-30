@@ -1,7 +1,17 @@
 ﻿$(document).ready(function () {
+    $(document).on('click', 'deleteImage', function (e) {
+        e.preventDefault();
 
+        let url = $(this).attr('href')
 
-    let isMain = $('#isMain').is(':checked');
+        fetch(url)
+            .then(res => res.text())
+            .then(data => {
+                $('.itemContainer').html(data)
+            })
+    })
+
+    let isMain = $('#IsMain').is(':checked');
 
     if (isMain) {
         $('.fileInput').removeClass('d-none');
@@ -11,7 +21,7 @@
         $('.parentInput').removeClass('d-none');
     }
 
-    $('#isMain').click(function () {
+    $('#IsMain').click(function () {
         let isMain = $(this).is(':checked');
 
         if (isMain) {
