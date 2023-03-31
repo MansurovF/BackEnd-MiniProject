@@ -3,7 +3,6 @@
     public class WishList:BaseEntity
     {
         public string? UserId { get; set; }
-        //public AppUser? User { get; set; }
         public int? ProductId { get; set; }
         public Product? Product { get; set; }
         public string? Title { get; set; }

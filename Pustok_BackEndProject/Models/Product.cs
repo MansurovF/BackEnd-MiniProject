@@ -12,6 +12,7 @@ namespace Pustok_BackEndProject.Models
         [Column(TypeName = "money")]
         public double DiscountedPrice { get; set; }
         [Column(TypeName = "money")]
+        public int Count { get; set; }
         public double Extax { get; set; }
         [StringLength(5)]
         public string? Seria { get; set; }
@@ -36,7 +37,18 @@ namespace Pustok_BackEndProject.Models
 
         public int? AuthorId { get; set; }
         public Author? Author { get; set; }
-        public IEnumerable<ProductTag>? ProductTags { get; set; }
-        public IEnumerable<ProductImage>? ProductImages { get; set; }
+        public List<ProductTag>? ProductTags { get; set; }
+        public List<ProductImage>? ProductImages { get; set; }
+        public IEnumerable<Basket>? Baskets { get; set; }
+        public List<Review>? Reviews { get; set; }
+
+        [NotMapped]
+        public IFormFile? MainFile { get; set; }
+        [NotMapped]
+        public IFormFile? HoverFile { get; set; }
+        [NotMapped]
+        public IEnumerable<IFormFile>? Files { get; set; }
+        [NotMapped]
+        public IEnumerable<int>? TagIds { get; set; }
     }
 }

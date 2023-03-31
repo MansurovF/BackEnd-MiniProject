@@ -1,0 +1,47 @@
+﻿@model PageNatedList<Product>
+@{
+    ViewData["Title"] = "Index";
+    int count = (Model.PageIndex - 1) * 3;
+}
+
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Author</th>
+            <th>Tags</th>
+            <th>Created At</th>
+            <th>Created By</th>
+            <th>Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Product product in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>
+                    <img style="width:100px;height:100px;" src="~/assets/image/products/@product.MainImage" />
+                </td>
+                <td>@product.Title</td>
+                <td>@product.Category?.Name</td>
+                <td>@product.Brand?.Name</td>
+                <td>@product.Author?.Name</td>
+                <td>@string.Join(", ",product.ProductTags?.Select(x=>x.Tag.Name))</td>
+                <td>@product.CreatedAt.ToString("dd-MMM-yyyy").ToUpper()</td>
+                <td>@product.CreatedBy</td>
+                <td>
+                    <a asp-area="manage" asp-controller="product" asp-action="Detail" asp-route-id="@product.Id" class="btn btn-primary">Detail</a>
+                    <a asp-area="manage" asp-controller="product" asp-action="Update" asp-route-id="@product.Id" class="btn btn-warning">Update</a>
+                    <a asp-area="manage" asp-controller="product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger deleteBtn">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

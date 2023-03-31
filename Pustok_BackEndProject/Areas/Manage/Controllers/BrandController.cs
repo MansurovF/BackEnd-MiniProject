@@ -114,13 +114,6 @@ namespace Pustok_BackEndProject.Areas.Manage.Controllers
             return PartialView("_BrandIndexPartial", brand);
 
 
-            //IQueryable<Brand> query = _context.Brands
-            //    .Include(b => b.Products)
-            //    .Where(b => b.IsDeleted == false);
-            //int pageIndex;
-
-            //return RedirectToAction(nameof(Index));
-            //return PartialView("_BrandIndexPartial", PageNatedList<Brand>.Create(query, pageIndex = 1, 3, 3));
         }
     }
 }

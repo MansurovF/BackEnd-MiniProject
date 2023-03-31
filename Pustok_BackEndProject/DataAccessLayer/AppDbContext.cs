@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Pustok_BackEndProject.Models;
 
 namespace Pustok_BackEndProject.DataAccessLayer
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
-        public AppDbContext(DbContextOptions options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
         public DbSet<Setting> Settings { get; set; }
@@ -19,6 +20,7 @@ namespace Pustok_BackEndProject.DataAccessLayer
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Basket> Baskets  { get; set; }
         public DbSet<WishList> WishLists  { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
     }
 }

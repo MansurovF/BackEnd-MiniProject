@@ -20,12 +20,14 @@ namespace Pustok_BackEndProject.Areas.Manage.Controllers
             _context = context;
             _env = env;
         }
-        public async Task <IActionResult>Index()
+        public async Task <IActionResult> Index(int pageIndex = 1)
         {
-            return View(await _context.Categories
-                .Include(c=>c.Products.Where(p=>p.IsDeleted == false))
-                .Where(c=>c.IsDeleted == false && c.IsMain)
-                .ToListAsync());
+            IQueryable<Category> query = _context.Categories
+                .Include(c => c.Products.Where(p => p.IsDeleted == false))
+                .Where(c => c.IsDeleted == false && c.IsMain)
+                .OrderByDescending(c => c.Id);
+
+            return View(PageNatedList<Category>.Create(query, pageIndex, 3, 8));
         }
 
         [HttpGet]
@@ -116,6 +118,7 @@ namespace Pustok_BackEndProject.Areas.Manage.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, Category category)
         {
             ViewBag.MainCategories = await _context.Categories.Where(c => c.IsDeleted == false && c.IsMain).ToListAsync();

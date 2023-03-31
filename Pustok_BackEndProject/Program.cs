@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Pustok_BackEndProject.DataAccessLayer;
 using Pustok_BackEndProject.Interfaces;
+using Pustok_BackEndProject.Models;
 using Pustok_BackEndProject.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,13 +17,32 @@ builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromSeconds(15);
 });
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.Password.RequiredUniqueChars = 0;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireDigit = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 8;
+    options.User.RequireUniqueEmail = true;
+
+    options.Lockout.AllowedForNewUsers = false;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+    options.Lockout.MaxFailedAccessAttempts = 3;
+
+
+}).AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders();
 
 builder.Services.AddScoped<ILayoutService, LayoutService>();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
-app.UseSession();
 app.UseStaticFiles();
+app.UseSession();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
             name: "areas",

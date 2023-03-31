@@ -1,0 +1,102 @@
+﻿@model List<CompareVM>
+
+<table class="table mb-0">
+    <tbody>
+        <tr>
+            <td class="first-column">Product</td>
+            @foreach (CompareVM compareVM in Model)
+            {
+                <td class="product-image-title">
+                    <a href="#" class="image">
+                        <img src="~/assets/image/products/@compareVM.Image"
+                         alt="Compare Product">
+                    </a>
+                    <a href="#" class="category">@compareVM.CategoryName</a>
+                    <a href="#" class="title">@compareVM.Title</a>
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <td class="first-column">Description</td>
+            @foreach (CompareVM compareVM in Model)
+            {
+                <td class="pro-desc">
+                    <p>
+                        @compareVM.Description
+                    </p>
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <td class="first-column">Price</td>
+            @foreach (CompareVM compareVM in Model)
+            {
+                <td class="pro-price">$@compareVM.Price</td>
+            }
+        </tr>
+        <tr>
+            <td class="first-column">Stock</td>
+            @foreach (CompareVM compareVM in Model)
+            {
+                if (compareVM.InStock == true)
+                {
+                    <td class="pro-stock">In Stock</td>
+                }
+                else
+                {
+                    <td class="pro-stock">Out of Stock</td>
+                }
+                
+            }
+        </tr>
+        <tr>
+            <td class="first-column">Add to cart</td>
+            @foreach (CompareVM compareVM in Model)
+            {
+                <td class="pro-addtocart">
+                <a asp-controller="basket" asp-action="addbasket" asp-route-Id="@compareVM.Id" tabindex="0">
+                    <i class="fas fa-shopping-cart"></i><span>ADD TO CART</span>
+                </a>
+            </td>
+            }
+        </tr>
+        <tr>
+            <td class="first-column">Delete</td>
+            @foreach (CompareVM compareVM in Model)
+            {
+                <td class="pro-remove"><a class="rmc" asp-controller="compare" asp-action="removecompare" asp-route-id="@compareVM.Id"><i class="fas fa-trash"></i></a></td>
+                
+            }
+            
+        </tr>
+        <tr>
+            <td class="first-column">Rating</td>
+            @foreach (CompareVM compareVM in Model)
+            {
+                @if (compareVM.Review != null)
+                {
+                    <td class="pro-ratting">
+                        @for (int i = 1; i < (int)Math.Ceiling((decimal)compareVM.Review); i++)
+                        {
+                            <i class="fas fa-star"></i>
+                        }
+                        @for (int i = 1; i < 5 - (int)Math.Ceiling((decimal)compareVM.Review); i++)
+                        {
+                            <i class="fas fa-star-o"></i>
+
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td class="pro-rating">
+                        Has Not Review
+                    </td>
+                }
+                
+            }
+        </tr>
+    </tbody>
+</table>

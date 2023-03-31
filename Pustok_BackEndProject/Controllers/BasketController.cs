@@ -38,7 +38,7 @@ namespace Pustok_BackEndProject.Controllers
 					}
 				}
 			}
-			return View(basketVMs); ;
+			return View(basketVMs);
 		}
 		public async Task<IActionResult> RemoveBasket(int? Id)
 		{
