@@ -75,7 +75,7 @@ namespace MiniBackEnd.Areas.Manage.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "SuperAdmin")]
+        //[Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? Id)
         {
             if (Id == null) return BadRequest();
@@ -85,7 +85,7 @@ namespace MiniBackEnd.Areas.Manage.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "SuperAdmin")]
+        //[Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? Id, Author author)
         {
             if (!ModelState.IsValid) return View(author);

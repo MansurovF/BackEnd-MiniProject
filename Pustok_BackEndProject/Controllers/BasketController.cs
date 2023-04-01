@@ -156,7 +156,6 @@ namespace Pustok_BackEndProject.Controllers
 					}
 				}
 			}
-
 			return PartialView("_BasketIndexPartial", basketVMs);
 		}
 		public async Task<IActionResult> RefreshBasketMain()

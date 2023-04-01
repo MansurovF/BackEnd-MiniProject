@@ -269,11 +269,18 @@ jQuery(document).ready(function($) {
         $(function() {
             $(".sb-range-slider").slider({
                 range: true,
-                min: 0,
-                max: 753,
-                values: [80, 320],
+                min: parseInt($('.min').val()),
+                max: parseInt($('.max').val()),
+                values: [parseInt($('.min').val()), parseInt($('.max').val())],
                 slide: function(event, ui) {
                     $("#amount").val("£" + ui.values[0] + " - £" + ui.values[1]);
+                    fetch('/shop/range?min=' + ui.values[0] + '&max=' + ui.values[1])
+                        .then(res => {
+                            return res.text()
+                        })
+                        .then(data => {
+                            $('.shop-product-wrap').html(data)
+                        })
                 }
             });
             $("#amount").val("£" + $(".sb-range-slider").slider("values", 0) +

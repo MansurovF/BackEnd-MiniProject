@@ -55,7 +55,7 @@ namespace MiniBackEnd.Areas.Manage.Controllers
         //        return View(registerVM);
         //    }
 
-        //    await _userManager.AddToRoleAsync(appUser, "Admin");
+        //    await _userManager.AddToRoleAsync(appUser, "Member");
 
         //    return RedirectToAction(nameof(Login));
         //}
