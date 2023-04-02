@@ -19,7 +19,7 @@ namespace MiniBackEnd.Areas.Manage.Controllers
             _context = context;
         }
 
-        //[Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         public async Task<IActionResult> Index(int pageIndex = 1)
         {
             IQueryable<Author> query = _context.Authors
@@ -28,7 +28,7 @@ namespace MiniBackEnd.Areas.Manage.Controllers
             return View(PageNatedList<Author>.Create(query, pageIndex, 3, 3));
         }
 
-        //[Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         public async Task<IActionResult> Detail(int? Id)
         {
             if (Id == null) return BadRequest();
@@ -40,7 +40,7 @@ namespace MiniBackEnd.Areas.Manage.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult Create()
         {
             return View();
@@ -48,7 +48,7 @@ namespace MiniBackEnd.Areas.Manage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(Author author)
         {
             if (!ModelState.IsValid)
@@ -75,7 +75,7 @@ namespace MiniBackEnd.Areas.Manage.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? Id)
         {
             if (Id == null) return BadRequest();
@@ -85,7 +85,7 @@ namespace MiniBackEnd.Areas.Manage.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? Id, Author author)
         {
             if (!ModelState.IsValid) return View(author);

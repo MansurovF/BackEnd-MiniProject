@@ -1,5 +1,6 @@
 ﻿using Pustok_BackEndProject.Models;
 using Pustok_BackEndProject.ViewModels.BasketViewModels;
+using Pustok_BackEndProject.ViewModels.WishListViewModels;
 
 namespace Pustok_BackEndProject.Interfaces
 {
@@ -8,6 +9,6 @@ namespace Pustok_BackEndProject.Interfaces
         Task<IDictionary<string, string>> GetSettings();
         Task<IEnumerable<Category>> GetCategories();
         Task<List<BasketVM>> GetBasket();
-
+        Task<List<WishlistVM>> GetWish();
     }
 }

@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Options;
+using MimeKit;
+using NuGet.Protocol;
 using Pustok_BackEndProject.Areas.Manage.ViewModels.AccountViewModels;
 using Pustok_BackEndProject.Models;
+using Pustok_BackEndProject.ViewModels;
 using System.Data;
 
 namespace Pustok_BackEndProject.Controllers
@@ -13,12 +19,16 @@ namespace Pustok_BackEndProject.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IConfiguration _con;
+        private readonly SmtpSetting _smtpSetting;
 
-        public AccountController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IConfiguration con,IOptions<SmtpSetting>smtpSetting)
         {
             _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
+            _con = con;
+            _smtpSetting = smtpSetting.Value;
         }
 
         public IActionResult Register()
@@ -54,6 +64,45 @@ namespace Pustok_BackEndProject.Controllers
 
             await _userManager.AddToRoleAsync(appUser, "Member");
 
+            string token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
+            string url = Url.Action("EmailConfirm", "Account", new { id = appUser.Id, token = token }, HttpContext.Request.Scheme,HttpContext.Request.Host.ToString());
+
+            await _userManager.AddToRoleAsync(appUser, "Member");
+            string templateFullPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "_EmailConfirm.cshtml");
+            string templateContent = await System.IO.File.ReadAllTextAsync(templateFullPath);
+            templateContent = templateContent.Replace("{{name}}", appUser.Name);
+            templateContent = templateContent.Replace("{{url}}", url);
+
+            MimeMessage mimeMessage = new MimeMessage();
+            mimeMessage.From.Add(MailboxAddress.Parse(_smtpSetting.Email));
+            //mimeMessage.From.Add(MailboxAddress.Parse(_con.GetSection("SmtpSetting:Email").Value));
+            //mimeMessage.From.Add(MailboxAddress.Parse("faridmnsvr@gmail.com"));
+            mimeMessage.To.Add(MailboxAddress.Parse(appUser.Email));
+            mimeMessage.Subject = "Email Confirmation";
+            mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+            {
+                Text = "<a href='http://localhost:21473/Account/login'>Go to Pustok man</a>"
+            };
+
+            using (SmtpClient smtpClient = new SmtpClient())
+            {
+                await smtpClient.ConnectAsync( _smtpSetting.Host, _smtpSetting.Port, MailKit.Security.SecureSocketOptions.StartTls);
+                await smtpClient.AuthenticateAsync(_smtpSetting.Email ,_smtpSetting.Password);
+                await smtpClient.SendAsync(mimeMessage);
+                await smtpClient.DisconnectAsync(true);
+                smtpClient.Dispose();
+            }
+
+            //using (SmtpClient smtpClient = new SmtpClient())
+            //{
+            //    await smtpClient.ConnectAsync(_con.GetSection("SmtpSetting:Host").Value,int.Parse(_con.GetSection("SmtpSetting:Port").Value) , MailKit.Security.SecureSocketOptions.StartTls);
+            //    await smtpClient.AuthenticateAsync(_con.GetSection("SmtpSetting:Email").Value, _con.GetSection("SmtpSetting:Password").Value);
+            //    await smtpClient.SendAsync(mimeMessage);
+            //    await smtpClient.DisconnectAsync(true);
+            //    smtpClient.Dispose();
+            //}
+
+
             return RedirectToAction(nameof(Login));
         }
         [HttpGet]
@@ -86,9 +135,17 @@ namespace Pustok_BackEndProject.Controllers
             //    return View(loginVM);
             //}
 
-
-            Microsoft.AspNetCore.Identity.SignInResult signInResult = await _signInManager
+            Microsoft.AspNetCore.Identity.SignInResult signInResult = null;
+            if (appUser.EmailConfirmed)
+            {
+                 signInResult = await _signInManager
                 .PasswordSignInAsync(appUser, loginVM.Password, loginVM.RememberMe, true);
+            }
+            else
+            {
+                ModelState.AddModelError("", "Check your Email");
+                return View();
+            }
 
             if (appUser.LockoutEnd > DateTime.UtcNow)
             {
@@ -212,6 +269,25 @@ namespace Pustok_BackEndProject.Controllers
             await _signInManager.SignInAsync(appUser, true);
 
             return RedirectToAction("Index", "Dashboard", new { areas = "Manage" });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult>EmailConfirm(string? id,string? token)
+        {
+
+            if (string.IsNullOrWhiteSpace(id)) return BadRequest();
+            if (string.IsNullOrWhiteSpace(token)) return BadRequest();
+           
+            AppUser appUser = await _userManager.FindByIdAsync(id);
+
+            if (appUser == null) return NotFound();
+
+            IdentityResult identityResult = await _userManager.ConfirmEmailAsync(appUser, token);
+            if (identityResult.Succeeded) return BadRequest();
+            TempData["Success"] = $"{appUser.Email} Successed"; 
+
+
+            return RedirectToAction(nameof(Login));
         }
     }
 }

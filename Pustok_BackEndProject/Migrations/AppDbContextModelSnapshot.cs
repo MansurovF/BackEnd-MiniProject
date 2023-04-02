@@ -243,7 +243,6 @@ namespace Pustok_BackEndProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -295,7 +294,6 @@ namespace Pustok_BackEndProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -355,7 +353,6 @@ namespace Pustok_BackEndProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -398,7 +395,6 @@ namespace Pustok_BackEndProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -465,7 +461,6 @@ namespace Pustok_BackEndProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -552,7 +547,6 @@ namespace Pustok_BackEndProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -599,7 +593,6 @@ namespace Pustok_BackEndProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -652,7 +645,6 @@ namespace Pustok_BackEndProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -709,6 +701,9 @@ namespace Pustok_BackEndProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Key")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -736,7 +731,6 @@ namespace Pustok_BackEndProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -794,7 +788,6 @@ namespace Pustok_BackEndProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -837,7 +830,6 @@ namespace Pustok_BackEndProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -941,7 +933,7 @@ namespace Pustok_BackEndProject.Migrations
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("Pustok_BackEndProject.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Baskets")
                         .HasForeignKey("ProductId");
 
                     b.Navigation("Product");
@@ -1010,7 +1002,7 @@ namespace Pustok_BackEndProject.Migrations
             modelBuilder.Entity("Pustok_BackEndProject.Models.Review", b =>
                 {
                     b.HasOne("Pustok_BackEndProject.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("ProductId");
 
                     b.HasOne("Pustok_BackEndProject.Models.AppUser", "User")
@@ -1057,9 +1049,13 @@ namespace Pustok_BackEndProject.Migrations
 
             modelBuilder.Entity("Pustok_BackEndProject.Models.Product", b =>
                 {
+                    b.Navigation("Baskets");
+
                     b.Navigation("ProductImages");
 
                     b.Navigation("ProductTags");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("Pustok_BackEndProject.Models.Tag", b =>

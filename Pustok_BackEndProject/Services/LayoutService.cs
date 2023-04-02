@@ -6,6 +6,7 @@ using Pustok_BackEndProject.ViewModels.BasketViewModels;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using NuGet.ContentModel;
+using Pustok_BackEndProject.ViewModels.WishListViewModels;
 
 namespace Pustok_BackEndProject.Services
 {
@@ -30,6 +31,61 @@ namespace Pustok_BackEndProject.Services
             IDictionary<string, string> settings = await _context.Settings.ToDictionaryAsync(s => s.Key, s => s.Value);
 
             return settings;
+        }
+        public async Task<List<WishlistVM>> GetWish()
+        {
+            //AppUser appUser = null;
+            List<WishList> wIshlists = null;
+
+
+
+            string cookie = _httpcontextAccessor.HttpContext.Request.Cookies["wish"];
+
+            if (!string.IsNullOrWhiteSpace(cookie))
+            {
+                List<WishlistVM> wishlistVMs = null;
+
+                if (wIshlists != null && wIshlists.Count > 0)
+                {
+                    wishlistVMs = new List<WishlistVM>();
+                    foreach (WishList wIshlist in wIshlists)
+                    {
+                        Product product = wIshlist.Product;
+                        if (product != null)
+                        {
+                            WishlistVM wishlistVM = new WishlistVM();
+
+                            wishlistVM.Id = product.Id;
+                            wishlistVM.Title = product.Title;
+                            wishlistVM.Price = product.DiscountedPrice > 0 ? product.DiscountedPrice : product.Price;
+                            wishlistVM.Image = product.MainImage;
+                            wishlistVM.ExTax = product.Extax;
+
+                            wishlistVMs.Add(wishlistVM);
+                        }
+
+                    }
+                }
+                else
+                {
+                    wishlistVMs = JsonConvert.DeserializeObject<List<WishlistVM>>(cookie);
+                    foreach (WishlistVM wishlistVM1 in wishlistVMs)
+                    {
+                        Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == wishlistVM1.Id);
+                        if (product != null)
+                        {
+                            wishlistVM1.Title = product.Title;
+                            wishlistVM1.Price = product.DiscountedPrice > 0 ? product.DiscountedPrice : product.Price;
+                            wishlistVM1.Image = product.MainImage;
+                            wishlistVM1.ExTax = product.Extax;
+                        }
+
+                    }
+                }
+
+                return wishlistVMs;
+            }
+            return new List<WishlistVM>();
         }
         public async Task<List<BasketVM>> GetBasket()
         {

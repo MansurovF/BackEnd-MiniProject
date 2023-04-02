@@ -4,6 +4,8 @@ using Pustok_BackEndProject.DataAccessLayer;
 using Pustok_BackEndProject.Interfaces;
 using Pustok_BackEndProject.Models;
 using Pustok_BackEndProject.Services;
+using Pustok_BackEndProject.ViewModels;
+using System.Drawing;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddNewtonsoftJson()
@@ -35,8 +37,10 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 }).AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
-builder.Services.AddScoped<ILayoutService, LayoutService>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.Configure<SmtpSetting>(builder.Configuration.GetSection("SmtpSetting"));
+builder.Services.AddScoped<ILayoutService, LayoutService>();
+
 var app = builder.Build();
 
 app.UseStaticFiles();

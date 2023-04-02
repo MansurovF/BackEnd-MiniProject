@@ -227,5 +227,61 @@
                 //    })
             })
     })
+
+    $(document).on('click', '.addwish', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        let url = $(this).attr('href');
+
+        fetch(url)
+            .then(res => {
+                return res.text();
+
+            }).then(data => {
+                $('.header-wish').html(data)
+            })
+    })
+
+    $(document).on('click', '.remove-wish', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        let url = $(this).attr('href');
+
+        fetch(url)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('.cart-table').html(data)
+            })
+    })
+    $(document).on('click', '.modal-content', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        let url = $(this).attr('href');
+
+        fetch(url)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('.modal-content').html(data)
+            })
+    })
+
+    //$('.modal-content').click(function (e) {
+    //    e.preventDefault();
+
+    //    let url = $(this).attr('href');
+
+    //    fetch(url)
+    //        .then(res => {
+    //            return res.text();
+
+    //        }).then(data => {
+    //            $('.modal-content').html(data)
+    //        })
+    //})
     
 })

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Pustok_BackEndProject.Extensions;
 using Pustok_BackEndProject.Helpers;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Pustok_BackEndProject.Areas.Manage.Controllers
 {
@@ -20,6 +21,7 @@ namespace Pustok_BackEndProject.Areas.Manage.Controllers
             _context = context;
             _env = env;
         }
+        [Authorize(Roles = "SuperAdmin,Admin")]
         public async Task <IActionResult> Index(int pageIndex = 1)
         {
             IQueryable<Category> query = _context.Categories
@@ -30,6 +32,7 @@ namespace Pustok_BackEndProject.Areas.Manage.Controllers
             return View(PageNatedList<Category>.Create(query, pageIndex, 3, 8));
         }
 
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet]
         public async Task<IActionResult> Detail(int ?id)
         {
@@ -43,6 +46,7 @@ namespace Pustok_BackEndProject.Areas.Manage.Controllers
             if (category == null) return NotFound();
             return View(category);
         }
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -50,6 +54,7 @@ namespace Pustok_BackEndProject.Areas.Manage.Controllers
 
             return View();
         }
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(Category category)
         {
@@ -100,7 +105,11 @@ namespace Pustok_BackEndProject.Areas.Manage.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        [Authorize(Roles = "SuperAdmin")]
 
+
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         public async Task<IActionResult>Update(int? Id)
         {
@@ -119,6 +128,7 @@ namespace Pustok_BackEndProject.Areas.Manage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? id, Category category)
         {
             ViewBag.MainCategories = await _context.Categories.Where(c => c.IsDeleted == false && c.IsMain).ToListAsync();
@@ -189,6 +199,7 @@ namespace Pustok_BackEndProject.Areas.Manage.Controllers
 
         [HttpGet]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
 
